@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Slider/Banner</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald&amp;subset=latin-ext"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-family: oswald;
+        font-size: 10px;
+      }
+
+      .team {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background-color: #ccc;
+        position: relative;
+      }
+
+      .team img.color {
+        position: absolute;
+        bottom: -40%;
+        right: -15%;
+        height: 90%;
+        z-index: 1;
+        animation: color 4s linear infinite;
+      }
+
+      .team img.gray {
+        position: absolute;
+        bottom: -15%;
+        left: -50%;
+        height: 110%;
+        opacity: 0.2;
+        animation: gray 4s linear infinite;
+      }
+
+      .team .member {
+        position: absolute;
+        top: 10%;
+        left: 0;
+        text-align: center;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        animation: text 4s linear infinite;
+      }
+
+      .team h1 {
+        font-size: 4rem;
+      }
+
+      .team h2 {
+        font-size: 2.2rem;
+      }
+
+      @media (orientation: landscape) {
+        .team img.color {
+          bottom: -35%;
+          right: 3%;
+          height: 90%;
+        }
+
+        .team img.gray {
+          bottom: -30%;
+          left: -5%;
+          height: 130%;
+        }
+
+        .team .member {
+          width: 60%;
+          right: 0;
+          left: auto;
+        }
+      }
+
+      @media (min-width: 1025px) {
+        .team h1 {
+          font-size: 8rem;
+        }
+
+        .team h2 {
+          font-size: 5rem;
+        }
+      }
+
+      @keyframes color {
+        0% {
+          transform: translateX(0);
+          opacity: 0;
+        }
+
+        8% {
+          opacity: 0;
+        }
+
+        13% {
+          opacity: 1;
+        }
+
+        87% {
+          opacity: 1;
+        }
+
+        92% {
+          opacity: 0;
+        }
+
+        100% {
+          transform: translateX(-5%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes gray {
+        0% {
+          transform: translateX(0) scale(1);
+          opacity: 0;
+        }
+
+        8% {
+          opacity: 0;
+        }
+
+        13% {
+          opacity: 0.2;
+        }
+
+        87% {
+          opacity: 0.2;
+        }
+
+        92% {
+          opacity: 0;
+        }
+
+        100% {
+          transform: translateX(5%) scale(1.1);
+          opacity: 0;
+        }
+      }
+
+      @keyframes text {
+        0% {
+          transform: scale(1);
+          opacity: 0;
+        }
+
+        8% {
+          opacity: 0;
+        }
+
+        13% {
+          opacity: 1;
+        }
+
+        87% {
+          opacity: 1;
+        }
+
+        92% {
+          opacity: 0;
+        }
+
+        100% {
+          transform: scale(1.1);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="team">
+      <img src="img/hero1.png" alt="Hero" class="color" />
+      <img src="img/hero1a.png" alt="Hero in gray" class="gray" />
+      <div class="member">
+        <h1>Goku</h1>
+        <h2>Saiyan</h2>
+      </div>
+    </section>
+
+    <script>
+      //Parameters
+      let activeElement = 0;
+      const timeChange = 4000;
+      // Finding elements
+      const colorImgHtml = document.querySelector(".color");
+      const grayImgHtml = document.querySelector(".gray");
+      const h1Html = document.querySelector(".member h1");
+      const h2Html = document.querySelector(".member h2");
+
+      //Tables with elements to switch
+      const colorImages = ["img/hero1.png", "img/hero2.png", "img/hero3.png"];
+      const grayImages = ["img/hero1a.png", "img/hero2a.png", "img/hero3a.png"];
+      const names = ["Goku", "Vegeta", "Piccolo"];
+      const professions = ["Saiyan", "Saiyan", "Namekian"];
+
+      function changeElement() {
+        console.log("automatyczne wwywołanie");
+        activeElement++;
+        if (activeElement == colorImages.length) {
+          activeElement = 0;
+        }
+        colorImgHtml.src = colorImages[activeElement];
+        grayImgHtml.src = grayImages[activeElement];
+        h1Html.textContent = names[activeElement];
+        h2Html.textContent = professions[activeElement];
+      }
+
+      setInterval(changeElement, timeChange);
+    </script>
+  </body>
+</html>
