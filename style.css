@@ -22,7 +22,6 @@ html {
   right: -15%;
   height: 90%;
   z-index: 1;
-  animation: color 4s linear infinite;
 }
 
 .team img.gray {
@@ -31,7 +30,6 @@ html {
   left: -50%;
   height: 110%;
   opacity: 0.2;
-  animation: gray 4s linear infinite;
 }
 
 .team .member {
@@ -42,7 +40,6 @@ html {
   width: 100%;
   text-transform: uppercase;
   letter-spacing: 2px;
-  animation: text 4s linear infinite;
 }
 
 .team h1 {
@@ -51,6 +48,37 @@ html {
 
 .team h2 {
   font-size: 2.2rem;
+}
+
+.dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dots span {
+  display: inline-block;
+  background-color: #000;
+  margin: 0 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px white;
+}
+
+.dots span.active {
+  box-shadow: 0 0 0 5px white, 0 0 3px 10px red;
+}
+
+.run-animation-color {
+  animation: color 4s linear infinite;
+}
+.run-animation-gray {
+  animation: gray 4s linear infinite;
+}
+.run-animation-text {
+  animation: text 4s linear infinite;
 }
 
 @media (orientation: landscape) {
