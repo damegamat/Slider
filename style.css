@@ -52,17 +52,18 @@ html {
 
 .dots {
   position: absolute;
-  bottom: 30px;
+  bottom: 93%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
 }
 
 .dots span {
   display: inline-block;
   background-color: #000;
-  margin: 0 20px;
-  width: 10px;
-  height: 10px;
+  margin: 0 15px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   box-shadow: 0 0 0 5px white;
 }
@@ -98,6 +99,17 @@ html {
     width: 60%;
     right: 0;
     left: auto;
+  }
+}
+@media (min-width: 600px) {
+  .dots {
+    bottom: 30px;
+    left: 50%;
+  }
+  .dots span {
+    width: 10px;
+    height: 10px;
+    margin: 0 20px;
   }
 }
 
