@@ -22,8 +22,9 @@ const slideList = [
 //Parameters
 let active = 0;
 const time = 4000;
-let runAnimation = {};
+let positionStartX;
 // Finding elements
+const mobileScreen = document.querySelector("team");
 const colorImgHtml = document.querySelector(".color");
 const grayImgHtml = document.querySelector(".gray");
 const h1Html = document.querySelector(".member h1");
@@ -79,4 +80,32 @@ const keyChangeSlide = e => {
   }
 };
 
+const touchstartChangeSlide = e => {
+  if (e.targetTouches.length == 1) {
+    positionStartX = e.touches[0].clientX;
+  }
+};
+
+const touchendChangeSlide = e => {
+  const positionEndX = e.changedTouches[0].clientX;
+  clearInterval(indexInterval);
+  positionStartX > positionEndX ? active++ : active--;
+  if (active === slideList.length) {
+    active = 0;
+  } else if (active < 0) {
+    active = slideList.length - 1;
+  }
+  colorImgHtml.src = slideList[active].img;
+  grayImgHtml.src = slideList[active].imgGray;
+  h1Html.textContent = slideList[active].name;
+  h2Html.textContent = slideList[active].profession;
+  refreshAnimation(colorImgHtml, grayImgHtml, h1Html, h2Html);
+
+  changeDot();
+  indexInterval = setInterval(changeSlide, time);
+};
+
 window.addEventListener("keydown", keyChangeSlide);
+
+window.addEventListener("touchstart", touchstartChangeSlide);
+window.addEventListener("touchend", touchendChangeSlide);
