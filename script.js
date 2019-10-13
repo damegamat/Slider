@@ -35,7 +35,7 @@ const changeDot = () => {
   dots[activeDot].classList.remove("active");
   dots[active].classList.add("active");
 };
-
+// Function to change slide
 const changeSlide = () => {
   active++;
   if (active === slideList.length) {
@@ -48,7 +48,7 @@ const changeSlide = () => {
   changeDot();
 };
 let indexInterval = setInterval(changeSlide, time);
-
+// Function to stop and start again css animation
 const refreshAnimation = (colorImgHtml, grayImgHtml, h1Html, h2Html) => {
   const elementsToRefresh = [colorImgHtml, grayImgHtml, h1Html, h2Html];
   const animationName = ["color", "gray", "text", "text"];
@@ -58,7 +58,7 @@ const refreshAnimation = (colorImgHtml, grayImgHtml, h1Html, h2Html) => {
     item.classList.add(`run-animation-${animationName[i]}`);
   });
 };
-
+// Function to change slide using keyboard
 const keyChangeSlide = e => {
   if (e.keyCode === 37 || e.keyCode === 39) {
     clearInterval(indexInterval);
@@ -79,17 +79,26 @@ const keyChangeSlide = e => {
     indexInterval = setInterval(changeSlide, time);
   }
 };
-
+// Functions to change slide using touch on mobile
 const touchstartChangeSlide = e => {
   if (e.targetTouches.length == 1) {
-    positionStartX = e.touches[0].clientX;
-  }
+    clearInterval(indexInterval);
+    positionStartX = e.touches[0].clientX.toFixed();
+  } else return;
 };
 
 const touchendChangeSlide = e => {
   const positionEndX = e.changedTouches[0].clientX;
-  clearInterval(indexInterval);
-  positionStartX > positionEndX ? active++ : active--;
+  if (positionStartX !== "") {
+    if (positionStartX > positionEndX) {
+      active++;
+    } else if (positionStartX < positionEndX) {
+      active--;
+    } else return;
+  } else {
+    indexInterval = setInterval(changeSlide, time);
+  }
+
   if (active === slideList.length) {
     active = 0;
   } else if (active < 0) {
