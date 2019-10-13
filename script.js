@@ -82,7 +82,6 @@ const keyChangeSlide = e => {
 // Functions to change slide using touch on mobile
 const touchstartChangeSlide = e => {
   if (e.targetTouches.length == 1) {
-    clearInterval(indexInterval);
     positionStartX = e.touches[0].clientX.toFixed();
     window.addEventListener("touchend", touchendChangeSlide);
   } else return;
@@ -90,16 +89,14 @@ const touchstartChangeSlide = e => {
 
 const touchendChangeSlide = e => {
   const positionEndX = e.changedTouches[0].clientX;
+  clearInterval(indexInterval);
   if (positionStartX !== "") {
     if (positionStartX > positionEndX) {
       active++;
     } else if (positionStartX < positionEndX) {
       active--;
     } else return;
-  } else {
-    indexInterval = setInterval(changeSlide, time);
   }
-
   if (active === slideList.length) {
     active = 0;
   } else if (active < 0) {
