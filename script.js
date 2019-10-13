@@ -84,6 +84,7 @@ const touchstartChangeSlide = e => {
   if (e.targetTouches.length == 1) {
     clearInterval(indexInterval);
     positionStartX = e.touches[0].clientX.toFixed();
+    window.addEventListener("touchend", touchendChangeSlide);
   } else return;
 };
 
@@ -117,4 +118,3 @@ const touchendChangeSlide = e => {
 window.addEventListener("keydown", keyChangeSlide);
 
 window.addEventListener("touchstart", touchstartChangeSlide);
-window.addEventListener("touchend", touchendChangeSlide);
